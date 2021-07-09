@@ -1,0 +1,9 @@
+.navbar-light {
+  background-color: #e3f2fd;
+}
+
+.navbar-header {
+  display: flex;
+  width: 100%;
+}
+
