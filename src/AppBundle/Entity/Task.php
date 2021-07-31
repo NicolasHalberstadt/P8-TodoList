@@ -41,7 +41,7 @@ class Task
     private $isDone;
     
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="tasks")
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="tasks", nullable=true)
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
@@ -61,11 +61,6 @@ class Task
     public function getCreatedAt()
     {
         return $this->createdAt;
-    }
-    
-    public function setCreatedAt($createdAt)
-    {
-        $this->createdAt = $createdAt;
     }
     
     public function getTitle()
