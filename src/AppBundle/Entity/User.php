@@ -47,9 +47,9 @@ class User implements UserInterface
     private $tasks;
     
     /**
-     * @ORM\Column(type="string", length=20)
+     * @ORM\Column(type="json_array")
      */
-    private $role;
+    private $roles = [];
     
     
     public function __construct()
@@ -113,21 +113,20 @@ class User implements UserInterface
         $this->tasks = $tasks;
     }
     
-    public function getRole()
-    {
-        return $this->role;
-    }
-    
-    public function setRole($role)
-    {
-        $this->role = $role;
-        
-        return $this;
-    }
-    
     public function getRoles()
     {
-        return array($this->role);
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+        
+        return array_unique($roles);
+    }
+    
+    public function setRoles(array $roles)
+    {
+        $this->roles = $roles;
+        
+        return $this;
     }
     
     public function eraseCredentials()
