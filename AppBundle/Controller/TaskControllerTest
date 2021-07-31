@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuites>
+  <testsuite name="Project Test Suite" tests="3" assertions="4" failures="0" errors="1" time="0.930043">
+    <testsuite name="Tests\AppBundle\Controller\DefaultControllerTest" file="/Applications/MAMP/htdocs/P8-TodoList/tests/AppBundle/Controller/DefaultControllerTest.php" tests="1" assertions="3" failures="0" errors="0" time="0.848537">
+      <testcase name="testIndex" class="Tests\AppBundle\Controller\DefaultControllerTest" file="/Applications/MAMP/htdocs/P8-TodoList/tests/AppBundle/Controller/DefaultControllerTest.php" line="9" assertions="3" time="0.848537"/>
+    </testsuite>
+    <testsuite name="Tests\AppBundle\Controller\SecurityControllerTest" file="/Applications/MAMP/htdocs/P8-TodoList/tests/AppBundle/Controller/SecurityControllerTest.php" tests="1" assertions="0" failures="0" errors="0" time="0.011456">
+      <testcase name="Warning" assertions="0" time="0.011456"/>
+    </testsuite>
+    <testsuite name="Tests\AppBundle\Controller\TaskControllerTest" file="/Applications/MAMP/htdocs/P8-TodoList/tests/AppBundle/Controller/TaskControllerTest.php" tests="1" assertions="1" failures="0" errors="1" time="0.070050">
+      <testcase name="testCreate" class="Tests\AppBundle\Controller\TaskControllerTest" file="/Applications/MAMP/htdocs/P8-TodoList/tests/AppBundle/Controller/TaskControllerTest.php" line="17" assertions="1" time="0.070050">
+        <error type="InvalidArgumentException">Tests\AppBundle\Controller\TaskControllerTest::testCreate
+InvalidArgumentException: The current node list is empty.
+
+/Applications/MAMP/htdocs/P8-TodoList/vendor/symfony/symfony/src/Symfony/Component/DomCrawler/Crawler.php:856
+/Applications/MAMP/htdocs/P8-TodoList/tests/AppBundle/Controller/TaskControllerTest.php:27
+</error>
+      </testcase>
+    </testsuite>
+  </testsuite>
+</testsuites>

@@ -1,6 +1,9 @@
 {% extends 'base.html.twig' %}
 
-{% block header_title %}<h1>Modifier <strong>{{ user.username }}</strong></h1>{% endblock %}
+{% block header_title %}
+    <h1>Modifier <strong>{{ user.username }}</strong>
+    </h1>
+{% endblock %}
 {% block header_img %}{% endblock %}
 
 {% block body %}
@@ -8,7 +11,17 @@
         {{ form_start(form, {'action' : path('user_edit', {'id' : user.id})}) }}
         {{ form_widget(form) }}
 
-        <button type="submit" class="btn btn-success pull-right">Modifier</button>
+        <button type="button" class="btn btn-warning" onclick="window.history.back();">Cancel</button>
+        <button type="submit" class="btn btn-success pull-right">
+            Modifier
+        </button>
+        <a href="{{ path('user_delete', {'id' : user.id}) }}"
+           class="btn btn-danger pull-right"
+           onclick="return confirm('Êtes vous sur de vouloir supprimer cet utilisateur ?')">
+            Supprimer
+        </a>
+
         {{ form_end(form) }}
+
     </div>
 {% endblock %}

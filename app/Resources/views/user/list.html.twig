@@ -7,27 +7,47 @@
 {% block body %}
     {% if users|length == 0 %}
         <div class="alert alert-warning" role="alert">
-            Il n'y a pas encore d'utilisateur enregistré. <a href="{{ path('user_create') }}" class="btn btn-warning pull-right">Créer un utilisateur</a>
+            Il n'y a pas encore d'utilisateur enregistré. <a
+                    href="{{ path('user_create') }}" class="btn btn-warning pull-right">Créer un utilisateur</a>
         </div>
     {% else %}
-        <div class="row">
+        <div class="row users">
             <table class="table">
                 <thead>
                 <tr>
                     <th>#</th>
                     <th>Nom d'utilisateur</th>
                     <th>Adresse d'utilisateur</th>
+                    <th>Roles</th>
                     <th>Actions</th>
                 </tr>
                 </thead>
                 <tbody>
                 {% for user in users %}
-                    <tr>
+                    <tr id="user_{{ user.username }}">
                         <th scope="row">{{ loop.index }}</th>
                         <td>{{ user.username }}</td>
                         <td>{{ user.email }}</td>
                         <td>
-                            <a href="{{ path('user_edit', {'id' : user.id}) }}" class="btn btn-success btn-sm">Edit</a>
+                            {% for role in user.roles %}
+                                {% if role == 'ROLE_ADMIN' %}
+                                    Admin
+                                {% elseif role == 'ROLE_USER' %}
+                                    User
+                                {% endif %}
+                                {% if user.roles[1]  is defined %}
+                                    {% if loop.index == 1 %}
+                                        and
+                                    {% endif %}
+                                {% endif %}
+                            {% endfor %}
+                        </td>
+                        <td class="user_links">
+                            <a href="{{ path('user_edit', {'id' : user.id}) }}"
+                               class="btn btn-success btn-sm">Edit</a>
+                            <a href="{{ path('user_delete', {'id' : user.id}) }}"
+                               class="btn btn-danger btn-sm" onclick="return confirm('Êtes vous sur de vouloir supprimer cet ' +
+                                'utilisateur ?')">Supprimer</a>
                         </td>
                     </tr>
                 {% endfor %}
