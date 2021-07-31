@@ -5,9 +5,9 @@
 
 {% block body %}
     <a href="{{ path('task_create') }}" class="btn btn-info pull-right">Créer une tâche</a>
-    <div class="row">
+    <div class="row tasks">
         {% for task in tasks %}
-            <div class="col-sm-4 col-lg-4 col-md-4">
+            <div class="col-sm-4 col-lg-4 col-md-4 task" id="task-{{ loop.index }}">
                 <div class="thumbnail">
                     <div class="caption">
                         <h4 class="pull-right">
@@ -15,19 +15,19 @@
                                 <span class="glyphicon glyphicon-remove"></span>{% endif %}
                         </h4>
                         <h4>
-                            <a href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a>
+                            <a class="task-edit" href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a>
                         </h4>
                         <p>{{ task.content }}</p>
                     </div>
-                    <div>
+                    <div class="task-forms">
                         <form action="{{ path('task_toggle', {'id' : task.id }) }}">
-                            <button class="btn btn-success btn-sm pull-right">
+                            <button class="btn btn-success btn-sm pull-right" id="task-toggle-btn-{{ loop.index }}">
                                 {% if not task.isDone %}Marquer comme faite{% else %}Marquer non terminée{% endif %}
                             </button>
                         </form>
-                        {% if app.user == task.user %}
-                            <form action="{{ path('task_delete', {'id' : task.id }) }}">
-                                <button class="btn btn-danger btn-sm pull-right">
+                        {% if app.user == task.user or is_granted('ROLE_ADMIN') %}
+                            <form action="{{ path('task_delete', {'id' : task.id }) }}" class="delete-form">
+                                <button class="btn btn-danger btn-sm pull-right task-delete-btn">
                                     Supprimer
                                 </button>
                             </form>
@@ -38,8 +38,7 @@
             </div>
         {% else %}
             <div class="alert alert-warning" role="alert">
-                Il n'y a pas encore de tâche enregistrée. <a href="{{ path('task_create') }}"
-                                                             class="btn btn-warning pull-right">Créer une tâche</a>
+                Il n'y a pas encore de tâche enregistrée.
             </div>
         {% endfor %}
     </div>
