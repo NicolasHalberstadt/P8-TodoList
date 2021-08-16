@@ -41,7 +41,7 @@ class Task
     private $isDone;
     
     /**
-     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="tasks", nullable=true)
+     * @ORM\ManyToOne(targetEntity="AppBundle\Entity\User", inversedBy="tasks")
      * @ORM\JoinColumn(name="user_id", referencedColumnName="id")
      */
     private $user;
