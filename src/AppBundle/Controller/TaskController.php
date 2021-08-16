@@ -4,13 +4,13 @@ namespace AppBundle\Controller;
 
 use AppBundle\Entity\Task;
 use AppBundle\Form\TaskType;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
-class TaskController extends Controller
+class TaskController extends AbstractController
 {
     /**
      * @Route("/tasks/todo", name="task_todo_list")
@@ -101,7 +101,7 @@ class TaskController extends Controller
     public function deleteTaskAction(Task $task)
     {
         if ((
-                $this->getUser() == $task->getUser()) ||
+            $this->getUser() == $task->getUser()) ||
             ($task->getUser() == null && $this->isGranted('ROLE_ADMIN'))) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($task);

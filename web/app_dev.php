@@ -1,7 +1,8 @@
 <?php
 
+use Composer\Autoload\ClassLoader;
+use Symfony\Component\ErrorHandler\Debug;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Debug\Debug;
 
 // If you don't want to setup permissions the proper way, just uncomment the following PHP line
 // read http://symfony.com/doc/current/book/installation.html#checking-symfony-application-configuration-and-setup
@@ -18,12 +19,12 @@ if (isset($_SERVER['HTTP_CLIENT_IP'])
     exit('You are not allowed to access this file. Check '.basename(__FILE__).' for more information.');
 }
 
-/** @var \Composer\Autoload\ClassLoader $loader */
+/** @var ClassLoader $loader */
 $loader = require __DIR__.'/../app/autoload.php';
 Debug::enable();
 
 $kernel = new AppKernel('dev', true);
-$kernel->loadClassCache();
+//$kernel->loadClassCache();
 $request = Request::createFromGlobals();
 $response = $kernel->handle($request);
 $response->send();
