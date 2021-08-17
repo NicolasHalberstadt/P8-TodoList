@@ -14,7 +14,8 @@ body {
 	border-bottom-width: 1px;
 }
 
-.table tbody > tr > td, .table thead > tr > td {
+.table tbody > tr > td,
+.table thead > tr > td {
 	padding-top: 3px;
 	padding-bottom: 3px;
 }
@@ -28,27 +29,40 @@ body {
 	margin-bottom: inherit;
 }
 
-.table-borderless th, .table-borderless td {
+.table-borderless th,
+.table-borderless td {
 	border: 0 !important;
 }
 
-.table tbody tr.covered-by-large-tests, li.covered-by-large-tests, tr.success, td.success, li.success, span.success {
+.table tbody tr.covered-by-large-tests,
+li.covered-by-large-tests,
+tr.success,
+td.success,
+li.success,
+span.success {
 	background-color: #dff0d8;
 }
 
-.table tbody tr.covered-by-medium-tests, li.covered-by-medium-tests {
+.table tbody tr.covered-by-medium-tests,
+li.covered-by-medium-tests {
 	background-color: #c3e3b5;
 }
 
-.table tbody tr.covered-by-small-tests, li.covered-by-small-tests {
+.table tbody tr.covered-by-small-tests,
+li.covered-by-small-tests {
 	background-color: #99cb84;
 }
 
-.table tbody tr.danger, .table tbody td.danger, li.danger, span.danger {
+.table tbody tr.danger,
+.table tbody td.danger,
+li.danger,
+span.danger {
 	background-color: #f2dede;
 }
 
-.table tbody td.warning, li.warning, span.warning {
+.table tbody td.warning,
+li.warning,
+span.warning {
 	background-color: #fcf8e3;
 }
 
@@ -89,14 +103,17 @@ pre span.string {
 	color: #2e3436;
 }
 
-span.success, span.warning, span.danger {
+span.success,
+span.warning,
+span.danger {
 	margin-right: 2px;
 	padding-left: 10px;
 	padding-right: 10px;
 	text-align: center;
 }
 
-#classCoverageDistribution, #classComplexity {
+#classCoverageDistribution,
+#classComplexity {
 	height: 200px;
 	width: 475px;
 }
