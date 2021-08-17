@@ -5,7 +5,7 @@
 !/var/cache
 /var/cache/*
 !var/cache/.gitkeep
-!/var/logs
+!/var/log
 /var/logs/*
 !var/logs/.gitkeep
 !/var/sessions
@@ -14,3 +14,18 @@
 !var/SymfonyRequirements.php
 /vendor/
 /web/bundles/
+
+###> symfony/framework-bundle ###
+/.env.local
+/.env.local.php
+/.env.*.local
+/config/secrets/prod/prod.decrypt.private.php
+/public/bundles/
+/var/
+/vendor/
+###< symfony/framework-bundle ###
+
+###> symfony/phpunit-bridge ###
+.phpunit.result.cache
+/phpunit.xml
+###< symfony/phpunit-bridge ###
