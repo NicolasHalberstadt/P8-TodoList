@@ -17,7 +17,7 @@ class UserControllerTest extends WebTestCase
     {
         $client = $this->login('User', 'compteuser');
         $client->followRedirects();
-        $crawler = $client->request('GET', '/users');
+        $client->request('GET', '/users');
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
     }
     
