@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use AppBundle\Entity\Task;
+use App\Entity\Task;
 
 /**
  * Class TaskTest

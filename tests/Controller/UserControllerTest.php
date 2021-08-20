@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tests\AppBundle\Controller;
+namespace Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -9,7 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  * Class UserControllerTest
  *
  * @author Nicolas Halberstadt <halberstadtnicolas@gmail.com>
- * @package Tests\AppBundle\Controller
+ * @package Tests\Controller
  */
 class UserControllerTest extends WebTestCase
 {
@@ -23,6 +23,7 @@ class UserControllerTest extends WebTestCase
     
     private function login($username, $password)
     {
+        self::ensureKernelShutdown();
         return static::createClient(
             [],
             [

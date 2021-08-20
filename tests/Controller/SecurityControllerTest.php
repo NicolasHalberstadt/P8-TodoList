@@ -1,7 +1,7 @@
 <?php
 
 
-namespace Tests\AppBundle\Controller;
+namespace Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
@@ -9,12 +9,13 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
  * Class SecurityController
  *
  * @author Nicolas Halberstadt <halberstadtnicolas@gmail.com>
- * @package Tests\AppBundle\Controller
+ * @package Tests\Controller
  */
 class SecurityControllerTest extends WebTestCase
 {
     public function testLoginAction()
     {
+        self::ensureKernelShutdown();
         $client = static::createClient();
         $client->followRedirects();
         $crawler = $client->request('GET', '/login');
@@ -23,11 +24,13 @@ class SecurityControllerTest extends WebTestCase
         $form['_username']->setValue('Admin');
         $form['_password']->setValue('compteAdmin');
         $crawler = $client->submit($form);
-        $this->assertContains('Bienvenue sur Todo List', $crawler->filter('h1')->text());
+        $this->assertStringContainsString('Bienvenue sur Todo List', $crawler->filter('.col-md-12 h1')->text());
+        print("login OK ");
     }
     
     public function testWrongLoginAction()
     {
+        self::ensureKernelShutdown();
         $client = static::createClient();
         $client->followRedirects();
         $crawler = $client->request('GET', '/login');
@@ -38,5 +41,6 @@ class SecurityControllerTest extends WebTestCase
         $form['_password']->setValue('wrong_pwd');
         $crawler = $client->submit($form);
         $this->assertSame(1, $crawler->filter('div.alert.alert-danger')->count());
+        print("wrong login OK ");
     }
 }

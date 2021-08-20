@@ -19,7 +19,7 @@ class TaskController extends AbstractController
     {
         return $this->render(
             'task/list.html.twig',
-            ['tasks' => $this->getDoctrine()->getRepository('AppBundle:Task')->findBy(['isDone' => false])]
+            ['tasks' => $this->getDoctrine()->getRepository(Task::class)->findBy(['isDone' => false])]
         );
     }
     
@@ -30,7 +30,7 @@ class TaskController extends AbstractController
     {
         return $this->render(
             'task/list.html.twig',
-            ['tasks' => $this->getDoctrine()->getRepository('AppBundle:Task')->findBy(['isDone' => true])]
+            ['tasks' => $this->getDoctrine()->getRepository(Task::class)->findBy(['isDone' => true])]
         );
     }
     
