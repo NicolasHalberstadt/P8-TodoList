@@ -1,7 +1,7 @@
 <?php
 
 use PHPUnit\Framework\TestCase;
-use AppBundle\Entity\User;
+use App\Entity\User;
 
 /**
  * Class UserTest

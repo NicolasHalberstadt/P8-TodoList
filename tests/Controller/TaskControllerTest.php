@@ -1,16 +1,16 @@
 <?php
 
 
-namespace Tests\AppBundle\Controller;
+namespace Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
-use AppBundle\Entity\Task;
+use App\Entity\Task;
 
 /**
  * Class TaskControllerTest
  *
  * @author Nicolas Halberstadt <halberstadtnicolas@gmail.com>
- * @package Tests\AppBundle\Controller
+ * @package Tests\Controller
  */
 class TaskControllerTest extends WebTestCase
 {
@@ -21,10 +21,13 @@ class TaskControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/tasks/todo');
         $tasks = $crawler->filter('.tasks')->count();
         static::assertGreaterThan(0, $tasks);
+        print("list OK ");
     }
     
-    private function login($username, $password)
+    private function login(string $username, string $password)
     {
+        self::ensureKernelShutdown();
+        
         return static::createClient(
             [],
             [
@@ -40,12 +43,17 @@ class TaskControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/tasks/create');
         $client->followRedirects();
         $form = $crawler->selectButton('task_create_button')->form();
+        
         $form['task[title]']->setValue('Task title for test');
         $form['task[content]']->setValue('Task content for test');
         $crawler = $client->submit($form);
         static::assertSame(1, $crawler->filter('div.alert.alert-success')->count());
+        print("creation OK ");
     }
     
+    /**
+     * @depends testCreate
+     */
     public function testEditAction()
     {
         $client = $this->login('Admin', 'compteAdmin');
@@ -53,14 +61,18 @@ class TaskControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/tasks/todo');
         $link = $crawler->filter('#task-1 .task-edit')->link();
         $crawler = $client->click($link);
-        static::assertContains('Title', $crawler->filter('.col-md-12 form')->text());
+        static::assertStringContainsString('Title', $crawler->filter('.col-md-12 form')->text());
         $form = $crawler->selectButton('Modifier')->form();
         $form['task[title]']->setValue('Task title test');
         $form['task[content]']->setValue('Task content test');
         $crawler = $client->submit($form);
         static::assertSame(1, $crawler->filter('div.alert.alert-success')->count());
+        print("edit OK ");
     }
     
+    /**
+     * @depends testEditAction
+     */
     public function testToggleAction()
     {
         $client = $this->login('Admin', 'compteAdmin');
@@ -69,16 +81,24 @@ class TaskControllerTest extends WebTestCase
         $toggleForm = $crawler->selectButton('task-toggle-btn-1')->form();
         $crawler = $client->submit($toggleForm);
         static::assertSame(1, $crawler->filter('div.alert.alert-success')->count());
+        print("toggle OK ");
     }
     
+    /**
+     * @depends testToggleAction
+     */
     public function testDeleteForbiddenAction()
     {
         $client = $this->login('User', 'compteuser');
         $client->followRedirects();
         $client->request('POST', '/tasks/1/delete');
         static::assertEquals(401, $client->getResponse()->getStatusCode());
+        print("forbidden OK ");
     }
     
+    /**
+     * @depends testToggleAction
+     */
     public function testDeleteAction()
     {
         $client = $this->login('Admin', 'compteAdmin');
@@ -87,7 +107,6 @@ class TaskControllerTest extends WebTestCase
         $deleteForm = $crawler->selectButton('Supprimer')->form();
         $crawler = $client->submit($deleteForm);
         $this->assertSame(1, $crawler->filter('div.alert.alert-success')->count());
+        print("delete OK ");
     }
-    
-    
 }

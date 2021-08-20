@@ -9,15 +9,23 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Security\Core\Encoder\PasswordEncoderInterface;
+use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 
 /**
  * Class UserController
  *
  * @author Nicolas Halberstadt <halberstadtnicolas@gmail.com>
- * @package AppBundle\Controller
+ * @package App\Controller
  */
 class UserController extends AbstractController
 {
+    private $passwordEncoder;
+    
+    public function __construct(UserPasswordEncoderInterface $passwordEncoder)
+    {
+        $this->passwordEncoder = $passwordEncoder;
+    }
+    
     /**
      * @Route("/users", name="user_list")
      */
@@ -25,21 +33,21 @@ class UserController extends AbstractController
     {
         return $this->render(
             'user/list.html.twig',
-            ['users' => $this->getDoctrine()->getRepository('AppBundle:User')->findAll()]
+            ['users' => $this->getDoctrine()->getRepository(User::class)->findAll()]
         );
     }
     
     /**
      * @Route("/users/create", name="user_create")
      */
-    public function createAction(Request $request, PasswordEncoderInterface $encoder)
+    public function createAction(Request $request)
     {
         $user = new User();
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            $password = $encoder->encodePassword($user, $user->getPassword());
+            $password = $this->passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
             $em->persist($user);
             $em->flush();
@@ -55,7 +63,7 @@ class UserController extends AbstractController
     /**
      * @Route("/users/{id}/edit", name="user_edit")
      */
-    public function editAction(User $user, Request $request, PasswordEncoderInterface $encoder)
+    public function editAction(User $user, Request $request, UserPasswordEncoderInterface $encoder)
     {
         $form = $this->createForm(UserType::class, $user);
         $form->handleRequest($request);
