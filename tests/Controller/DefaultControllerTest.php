@@ -16,6 +16,5 @@ class DefaultControllerTest extends WebTestCase
             "Bienvenue sur Todo List",
             $crawler->filter('.col-md-12 h1')->text()
         );
-        print("index OK ");
     }
 }

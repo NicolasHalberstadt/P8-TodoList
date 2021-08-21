@@ -25,7 +25,6 @@ class SecurityControllerTest extends WebTestCase
         $form['_password']->setValue('compteAdmin');
         $crawler = $client->submit($form);
         $this->assertStringContainsString('Bienvenue sur Todo List', $crawler->filter('.col-md-12 h1')->text());
-        print("login OK ");
     }
     
     public function testWrongLoginAction()
@@ -41,6 +40,5 @@ class SecurityControllerTest extends WebTestCase
         $form['_password']->setValue('wrong_pwd');
         $crawler = $client->submit($form);
         $this->assertSame(1, $crawler->filter('div.alert.alert-danger')->count());
-        print("wrong login OK ");
     }
 }
