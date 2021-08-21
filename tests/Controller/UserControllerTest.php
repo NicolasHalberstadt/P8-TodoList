@@ -21,9 +21,10 @@ class UserControllerTest extends WebTestCase
         $this->assertEquals(403, $client->getResponse()->getStatusCode());
     }
     
-    private function login($username, $password)
+    private function login(string $username, string $password)
     {
         self::ensureKernelShutdown();
+        
         return static::createClient(
             [],
             [
@@ -44,8 +45,8 @@ class UserControllerTest extends WebTestCase
     public function testCreateAction()
     {
         $client = $this->login('Admin', 'compteAdmin');
-        $client->followRedirects();
         $crawler = $client->request('GET', '/users/create');
+        $client->followRedirects();
         $form = $crawler->selectButton('Ajouter')->form();
         $form['user[username]'] = 'UserTest';
         $form['user[email]'] = 'usertest@contact.com';
@@ -55,6 +56,9 @@ class UserControllerTest extends WebTestCase
         $this->assertSame(1, $crawler->filter('div.alert.alert-success')->count());
     }
     
+    /**
+     * @depends testCreateAction
+     */
     public function testUpdateAction()
     {
         $client = $this->login('Admin', 'compteAdmin');
@@ -71,6 +75,9 @@ class UserControllerTest extends WebTestCase
         $this->assertSame(1, $crawler->filter('div.alert.alert-success')->count());
     }
     
+    /**
+     * @depends testUpdateAction
+     */
     public function testDeleteAction()
     {
         $client = $this->login('Admin', 'compteAdmin');

@@ -15,11 +15,12 @@ class TaskTest extends TestCase
         $task = new Task();
         $task->setTitle('Task test title');
         $task->setContent('Task test content');
+        $now = new \DateTime();
+        $this->assertEquals($now->format('Y-m-d H:i:s'), $task->getCreatedAt()->format('Y-m-d H:i:s'));
         $this->assertSame(null, $task->getId());
         $this->assertSame(false, $task->isDone());
         $this->assertEquals('Task test title', $task->getTitle());
         $this->assertEquals('Task test content', $task->getContent());
-        $this->assertEquals(new \DateTime(), $task->getCreatedAt());
         $this->assertEquals(null, $task->getUser());
     }
     

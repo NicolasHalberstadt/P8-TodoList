@@ -21,7 +21,6 @@ class TaskControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/tasks/todo');
         $tasks = $crawler->filter('.tasks')->count();
         static::assertGreaterThan(0, $tasks);
-        print("list OK ");
     }
     
     private function login(string $username, string $password)
@@ -48,7 +47,6 @@ class TaskControllerTest extends WebTestCase
         $form['task[content]']->setValue('Task content for test');
         $crawler = $client->submit($form);
         static::assertSame(1, $crawler->filter('div.alert.alert-success')->count());
-        print("creation OK ");
     }
     
     /**
@@ -67,7 +65,6 @@ class TaskControllerTest extends WebTestCase
         $form['task[content]']->setValue('Task content test');
         $crawler = $client->submit($form);
         static::assertSame(1, $crawler->filter('div.alert.alert-success')->count());
-        print("edit OK ");
     }
     
     /**
@@ -81,7 +78,6 @@ class TaskControllerTest extends WebTestCase
         $toggleForm = $crawler->selectButton('task-toggle-btn-1')->form();
         $crawler = $client->submit($toggleForm);
         static::assertSame(1, $crawler->filter('div.alert.alert-success')->count());
-        print("toggle OK ");
     }
     
     /**
@@ -93,7 +89,6 @@ class TaskControllerTest extends WebTestCase
         $client->followRedirects();
         $client->request('POST', '/tasks/1/delete');
         static::assertEquals(401, $client->getResponse()->getStatusCode());
-        print("forbidden OK ");
     }
     
     /**
@@ -107,6 +102,5 @@ class TaskControllerTest extends WebTestCase
         $deleteForm = $crawler->selectButton('Supprimer')->form();
         $crawler = $client->submit($deleteForm);
         $this->assertSame(1, $crawler->filter('div.alert.alert-success')->count());
-        print("delete OK ");
     }
 }
