@@ -4,6 +4,12 @@ namespace Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
+/**
+ * Class DefaultControllerTest
+ *
+ * @author Nicolas Halberstadt <halberstadtnicolas@gmail.com>
+ * @package Tests\Controller
+ */
 class DefaultControllerTest extends WebTestCase
 {
     public function testIndex()

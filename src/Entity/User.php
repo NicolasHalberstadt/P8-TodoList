@@ -100,7 +100,7 @@ class User implements UserInterface
     /**
      * @return ArrayCollection
      */
-    public function getTasks()
+    public function getTasks(): ArrayCollection
     {
         return $this->tasks;
     }
@@ -113,7 +113,7 @@ class User implements UserInterface
         $this->tasks = $tasks;
     }
     
-    public function getRoles()
+    public function getRoles(): array
     {
         $roles = $this->roles;
         // guarantee every user at least has ROLE_USER
