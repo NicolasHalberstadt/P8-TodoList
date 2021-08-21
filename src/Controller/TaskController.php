@@ -10,6 +10,12 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpKernel\Exception\UnauthorizedHttpException;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Security;
 
+/**
+ * Class TaskController
+ *
+ * @author Nicolas Halberstadt <halberstadtnicolas@gmail.com>
+ * @package App\Controller
+ */
 class TaskController extends AbstractController
 {
     /**

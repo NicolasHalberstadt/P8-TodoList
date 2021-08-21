@@ -6,6 +6,12 @@ use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
+/**
+ * Class TaskType
+ *
+ * @author Nicolas Halberstadt <halberstadtnicolas@gmail.com>
+ * @package App\Form
+ */
 class TaskType extends AbstractType
 {
     public function buildForm(FormBuilderInterface $builder, array $options)

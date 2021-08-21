@@ -58,7 +58,7 @@ class Task
         return $this->id;
     }
     
-    public function getCreatedAt()
+    public function getCreatedAt(): \Datetime
     {
         return $this->createdAt;
     }
@@ -83,7 +83,7 @@ class Task
         $this->content = $content;
     }
     
-    public function isDone()
+    public function isDone(): bool
     {
         return $this->isDone;
     }
