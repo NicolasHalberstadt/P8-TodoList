@@ -1,7 +1,8 @@
 # P8 - ToDo & Co
 
 <hr>
-[![Codacy Badge](https://api.codacy.com/project/badge/Grade/9d0d230bae094fb39c8b08d3c38a0ecf)](https://app.codacy.com/gh/NicolasHalberstadt/P8-TodoList?utm_source=github.com&utm_medium=referral&utm_content=NicolasHalberstadt/P8-TodoList&utm_campaign=Badge_Grade_Settings)
+
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/d31eb41d48ab460b8108e21060f16f9c)](https://www.codacy.com/gh/NicolasHalberstadt/P8-TodoList/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=NicolasHalberstadt/P8-TodoList&amp;utm_campaign=Badge_Grade)
 
 Amélioration et documentation du projet existant "ToDo & Co".
 
