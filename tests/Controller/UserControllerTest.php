@@ -15,7 +15,7 @@ class UserControllerTest extends WebTestCase
 {
     public function testForbiddenAccess()
     {
-        $client = $this->login('User', 'compteuser');
+        $client = $this->login('User', 'compteUser');
         $client->followRedirects();
         $client->request('GET', '/users');
         $this->assertEquals(403, $client->getResponse()->getStatusCode());

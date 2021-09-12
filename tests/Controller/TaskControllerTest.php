@@ -85,7 +85,7 @@ class TaskControllerTest extends WebTestCase
      */
     public function testDeleteForbiddenAction()
     {
-        $client = $this->login('User', 'compteuser');
+        $client = $this->login('User', 'compteUser');
         $client->followRedirects();
         $client->request('POST', '/tasks/1/delete');
         static::assertEquals(401, $client->getResponse()->getStatusCode());
