@@ -1,4 +1,4 @@
-# Contribute to the project
+# Contribuer au projet
 
 <hr>
 
