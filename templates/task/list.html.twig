@@ -14,6 +14,7 @@
                             {% if task.isDone %}<span class="glyphicon glyphicon-ok"></span>{% else %}
                                 <span class="glyphicon glyphicon-remove"></span>{% endif %}
                         </h4>
+                        <p>by {% if task.user == null %}anonyme{% else %}{{ task.user.username }}{% endif %}</p>
                         <h4>
                             <a class="task-edit" href="{{ path('task_edit', {'id' : task.id }) }}">{{ task.title }}</a>
                         </h4>
