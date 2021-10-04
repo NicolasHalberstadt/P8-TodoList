@@ -48,10 +48,10 @@ class UserControllerTest extends WebTestCase
         $crawler = $client->request('GET', '/users/create');
         $client->followRedirects();
         $form = $crawler->selectButton('Ajouter')->form();
-        $form['user[username]'] = 'UserTest';
-        $form['user[email]'] = 'usertest@contact.com';
-        $form['user[password][first]'] = 'user_password';
-        $form['user[password][second]'] = 'user_password';
+        $form['user[username]'] = 'Test';
+        $form['user[email]'] = 'test@todolist.com';
+        $form['user[password][first]'] = 'compteTest';
+        $form['user[password][second]'] = 'compteTest';
         $crawler = $client->submit($form);
         $this->assertSame(1, $crawler->filter('div.alert.alert-success')->count());
     }
@@ -64,13 +64,11 @@ class UserControllerTest extends WebTestCase
         $client = $this->login('Admin', 'compteAdmin');
         $client->followRedirects();
         $crawler = $client->request('GET', '/users');
-        $updateLink = $crawler->filter('#user_UserTest .user_links a:first-of-type')->link();
+        $updateLink = $crawler->filter('#user_Test .user_links a:first-of-type')->link();
         $crawler = $client->click($updateLink);
         $form = $crawler->selectButton('Modifier')->form();
-        $form['user[username]'] = 'UserTest';
-        $form['user[email]'] = 'usertest@contact.com';
-        $form['user[password][first]'] = 'password_user';
-        $form['user[password][second]'] = 'password_user';
+        $form['user_edit[username]'] = 'Test';
+        $form['user_edit[email]'] = 'usertest@contact.com';
         $crawler = $client->submit($form);
         $this->assertSame(1, $crawler->filter('div.alert.alert-success')->count());
     }
@@ -83,7 +81,7 @@ class UserControllerTest extends WebTestCase
         $client = $this->login('Admin', 'compteAdmin');
         $client->followRedirects();
         $crawler = $client->request('GET', '/users');
-        $deleteLink = $crawler->filter('#user_UserTest .user_links a:last-of-type')->link();
+        $deleteLink = $crawler->filter('#user_Test .user_links a:last-of-type')->link();
         $crawler = $client->click($deleteLink);
         $this->assertSame(1, $crawler->filter('div.alert.alert-success')->count());
     }
