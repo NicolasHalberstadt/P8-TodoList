@@ -1,5 +1,6 @@
 <?php
 
+use Doctrine\Common\Collections\ArrayCollection;
 use PHPUnit\Framework\TestCase;
 use App\Entity\User;
 
@@ -13,18 +14,18 @@ class UserTest extends TestCase
     public function testUserCreate()
     {
         $user = new User();
-        $user->setUsername('Username_test');
+        $user->setUsername('User_test');
         $user->setEmail('email@test.com');
-        $user->setPassword('test_password');
-        $user->setTasks([]);
+        $user->setPassword('compteUser');
+        $user->setTasks(new ArrayCollection());
         $this->assertEquals(null, $user->getId());
-        $this->assertEquals('Username_test', $user->getUsername());
+        $this->assertEquals('User_test', $user->getUsername());
         $this->assertEquals('email@test.com', $user->getEmail());
         $this->assertIsArray($user->getRoles());
         $this->assertContains('ROLE_USER', $user->getRoles());
         $this->assertEquals(null, $user->getSalt());
         $this->assertEmpty($user->getTasks());
-        $this->assertEquals('test_password', $user->getPassword());
+        $this->assertEquals('compteUser', $user->getPassword());
     }
     
     public function testUpdateUserRole()

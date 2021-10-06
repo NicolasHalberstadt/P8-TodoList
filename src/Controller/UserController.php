@@ -49,9 +49,6 @@ class UserController extends AbstractController
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
             $em = $this->getDoctrine()->getManager();
-            if($user->getPassword() === null ) {
-                $form->get('password')->adError(new FormError('Le mot de passe ne peut pas etre nul'));
-            }
             $password = $this->passwordEncoder->encodePassword($user, $user->getPassword());
             $user->setPassword($password);
             $em->persist($user);

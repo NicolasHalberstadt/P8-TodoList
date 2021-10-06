@@ -29,6 +29,12 @@ class UserFixtures extends Fixture
         $user->setPassword($this->passwordEncoder->encodePassword($user, 'compteUser'));
         $manager->persist($user);
         
+        $user = new User();
+        $user->setUsername('Member');
+        $user->setEmail('member@todolist.com');
+        $user->setPassword($this->passwordEncoder->encodePassword($user, 'compteMember'));
+        $manager->persist($user);
+        
         $manager->flush();
     }
 }

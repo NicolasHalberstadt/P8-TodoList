@@ -21,6 +21,7 @@
     </coverage>
     <php>
         <ini name="error_reporting" value="-1"/>
+        <ini name="display_errors" value="true"/>
         <server name="KERNEL_DIR" value="/Applications/MAMP/htdocs/P8-TodoList/src/"/>
         <env name="KERNEL_CLASS" value="App\Kernel"/>
         <!-- ###+ symfony/framework-bundle ### -->
