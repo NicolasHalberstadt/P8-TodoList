@@ -2,9 +2,21 @@
 
 {% block header_img %}<img class="slide-image" src="{{ asset('img/todolist_content.jpg') }}"
                            alt="todo list">{% endblock %}
-
 {% block body %}
-    <a href="{{ path('task_create') }}" class="btn btn-info pull-right">Créer une tâche</a>
+    {% set currentPath = path(app.request.attributes.get('_route'),
+        app.request.attributes.get('_route_params')) %}
+    <div class="task-list-btn">
+        {% if currentPath == '/tasks/todo' %}
+            <a href="{{ path('task_done_list') }}" class="btn btn-success" role="button">Consulter la liste des tâches
+                terminées</a>
+        {% else %}
+            <a href="{{ path('task_todo_list') }}" class="btn btn-success" role="button">Consulter la liste des tâches
+                a faire</a>
+        {% endif %}
+        <a href="{{ path('task_create') }}" class="btn btn-info pull-right" role="button">Créer une tâche</a>
+        <hr>
+    </div>
+
     <div class="row tasks">
         {% for task in tasks %}
             <div class="col-sm-4 col-lg-4 col-md-4 task" id="task-{{ loop.index }}">
@@ -27,19 +39,24 @@
                             </button>
                         </form>
                         {% if app.user == task.user or is_granted('ROLE_ADMIN') %}
-                            <form action="{{ path('task_delete', {'id' : task.id }) }}" class="delete-form">
+                            <form onsubmit="return confirm('Êtes vous sur de vouloir supprimer cette tâche?');"
+                                  action="{{ path('task_delete', {'id' :task.id }) }}" class="delete-form">
                                 <button class="btn btn-danger btn-sm pull-right task-delete-btn">
                                     Supprimer
                                 </button>
                             </form>
                         {% endif %}
-
                     </div>
                 </div>
             </div>
         {% else %}
             <div class="alert alert-warning" role="alert">
-                Il n'y a pas encore de tâche enregistrée.
+                {% if currentPath == '/tasks/todo' %}
+                    {% set type = 'a faire' %}
+                {% else %}
+                    {% set type = 'faites' %}
+                {% endif %}
+                Il n'y a pas encore de tâche {{ type }} enregistrée.
             </div>
         {% endfor %}
     </div>
